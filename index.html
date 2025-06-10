@@ -1,15 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExoCompass - Exoplanet Explorer</title> <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1>Exoplanet Catalog</h1>
-    <div id="planet-list">
 
-    </div>
+<body>
+    <nav class="navbar">
+        <ul class="navbar-list">
+            <li class="icon">
+                🪐
+            </li>
+            <li class="nav-item">
+                <a>ExoCompass!</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">Random Planet!</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="hero">
+        <div class="heading">
+            <h1>ExoCompass</h1>
+        </div>
+        <div class="sub-heading">
+            <h2><span class="highlight">Discover</span> a <span class="highlight">planet</span> you didn't know existed!</h2>
+        </div>
+    </section>
+
+    <main>
+        <div id="planet-display">
+            <div id="planet-card">
+                <h2 id="planet-name">Loading Planet...</h2>
+                <p><strong>Host Star:</strong> <span id="host-name">N/A</span></p>
+                <p><strong>Discovery Method:</strong> <span id="discovery-method">N/A</span></p>
+                <p><strong>Discovered in:</strong> <span id="discovery-year">N/A</span></p>
+                <p><strong>Orbital Period:</strong> <span id="orbital-period">N/A</span></p>
+                <p><strong>Mass (vs. Earth):</strong> <span id="planet-mass">N/A</span></p>
+                <p><strong>Radius (vs. Earth):</strong> <span id="planet-radius">N/A</span></p>
+            </div>
+        </div>
+
+        <div id="controls">
+            <button id="random-planet">Discover a Random Planet</button>
+        </div>
+    </main>
+    
     <script src="script.js"></script>
 </body>
 </html>

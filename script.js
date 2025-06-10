@@ -1,38 +1,44 @@
-const planetListDiv = document.getElementById('planet-list');
+let allPlanets = [];
 
-const apiUrl = '/api/proxy';
+const planetName = document.getElementById('planet-name');
+const hostName = document.getElementById('host-name');
+const discoveryMethod = document.getElementById('discovery-method');
+const discoveryYear = document.getElementById('discovery-year');
+const orbitalPeriod = document.getElementById('orbital-period');
+const planetMass = document.getElementById('planet-mass');
+const planetRadius = document.getElementById('planet-radius');
+const randomPlanet = document.getElementById('random-planet');
 
-async function fetchPlanets(){
-    planetListDiv.innerHTML = '<p>Loading exoplanets...</p>';
+
+function displayPlanet(planet){
+    planetName.textContent = planet.pl_name || 'Unknown Planet';
+    hostName.textContent = planet.hostname || 'N/A';
+    discoveryMethod.textContent = planet.discoverymethod || 'N/A';
+    discoveryYear.textContent = planet.disc_year || 'N/A';
+    orbitalPeriod.textContent = planet.pl_orbper ? `${Number(planet.pl_orbper).toFixed(2)} days` : 'N/A';
+    planetMass.textContent = planet.pl_masse ? `${Number(planet.pl_masse).toFixed(2)}x Earth` : 'N/A';
+    planetRadius.textContent = planet.pl_rade ? `${Number(planet.pl_rade).toFixed(2)}x Earth` : 'N/A';
+}
+
+function getRandomPlanet(){
+    const randomIndex = Math.floor(Math.random() * allPlanets.length);
+    const randomPlanet = allPlanets[randomIndex];
+
+    displayPlanet(randomPlanet);
+}
+
+async function initialize(){
+    const apiUrl = '/api/proxy';
 
     const response = await fetch(apiUrl);
 
     const data = await response.json();
 
-    console.log(data);
+    allPlanets = data;
 
-    displayPlanets(data);
+    getRandomPlanet();
 }
 
-function displayPlanets(planets){
-    planetListDiv.innerHTML = '';
+randomPlanet.addEventListener('click', getRandomPlanet);
 
-    const ul = document.createElement('ul');
-
-    const planetsToShow = planets.slice(0,20);
-
-    planetsToShow.forEach(planet => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-        <strong>${planet.pl_name || 'N/A'}</strong> (Host: ${planet.hostname || 'N/A'})<br>
-        Discovery: ${planet.discoverymethod || 'N/A'} in ${planet.disc_year || 'N/A'}<br>
-        Orbital Period: ${planet.pl_orbper ? planet.pl_orbper.toFixed(2) + ' days' : 'N/A'}<br>
-        Mass: ${planet.pl_masse ? planet.pl_masse.toFixed(2) + 'M' : 'N/A'}<br>
-        Radius: ${planet.pl_rade ? planet.pl_rade.toFixed(2) + 'R' : 'N/A'}`;
-        ul.appendChild(li);
-    });
-
-    planetListDiv.appendChild(ul);
-}
-
-fetchPlanets();
+initialize();
